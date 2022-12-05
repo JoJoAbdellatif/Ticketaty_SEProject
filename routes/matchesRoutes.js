@@ -5,6 +5,7 @@ const matchRoute = express.Router();
 const axios = require('axios')
 const URLUpdateMatch = 'http://localhost:5000/api/match/'
 
+//Get all matches
 matchRoute.get('/',asyncHandler(async(req,res)=>{
     const matches = await matches.findAll()
 
@@ -13,7 +14,7 @@ matchRoute.get('/',asyncHandler(async(req,res)=>{
     
 }))
 
-
+//Get match by id
 matchRoute.get('/:id',asyncHandler(async(req,res)=>{
     const matchExist = await matches.findById({_id:req.params.id});
 
@@ -25,6 +26,7 @@ matchRoute.get('/:id',asyncHandler(async(req,res)=>{
    
 }))
 
+//Create New Match
 matchRoute.post('/addMatch',asyncHandler(async(req,res)=>{
     const {MatchNumber,RoundNumber,DateUtc,Location
         ,StadiumCapacity,HomeTeam,AwayTeam,Group,HomeTeamScore,AwayTeamScore} = req.body;
@@ -37,6 +39,7 @@ matchRoute.post('/addMatch',asyncHandler(async(req,res)=>{
 
 }))
 
+// Update match 
 matchRoute.patch('/update/:id',asyncHandler(async(req,res)=>{
     const matchExist = await matches.findOne({ _id:req.params.id});
 
